@@ -1,0 +1,44 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+    defaultConfig {
+        applicationId "skylab.zeng.td_beacon"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+
+    }
+    buildTypes {
+        release {
+           minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable false
+        }
+    }
+    productFlavors {
+    }
+}
+repositories {
+    mavenCentral()
+    maven {
+        url "https://maven.google.com"
+    }
+    jcenter()
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+    flatDir {
+        dirs 'libs'   // aar目录
+    }
+}
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    compile(name: 'recyclerview-v7-26.0.0-alpha1', ext: 'aar')
+    implementation project(':dfu')
+    implementation project(':scanner')
+}
